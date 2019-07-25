@@ -2,12 +2,14 @@ package br.com.crcarvalho.agendamentos.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import br.com.crcarvalho.agendamentos.model.Agendamento;
@@ -22,20 +24,30 @@ public class AgendamentoRepositoryTest {
 	@Autowired
 	private AgendamentoService agendamentoService;
 	
-	@Test
-	public void buscandoAgendamentosComListaVazia() {
-		Page<Agendamento> agendamentos = agendamentoService.findAll(PageRequest.of(0, 10));
+	@Before
+	public void inicio() {
+		Agendamento agendamento = new Agendamento(new Usuario(1L, "rafael", "rafael@email.com", "123456"), new Item(1L, "Carro"));
+		agendamento.setData(LocalDate.now());
+		agendamento.setHoraInicio(LocalTime.of(10, 00));
+		agendamento.setHoraFim(LocalTime.of(11, 59));
 		
-		assertThat(agendamentos.getTotalElements()).isEqualByComparingTo(0L);
+		agendamentoService.save(agendamento);
 	}
 	
 	@Test
-	public void cadastrandoNovoAgendamento() {
+	public void buscandoItemJaRegistradoParaOPeriodo() {
 		Agendamento agendamento = new Agendamento(new Usuario(1L, "rafael", "rafael@email.com", "123456"), new Item(1L, "Carro"));
+		agendamento.setData(LocalDate.now());
+		agendamento.setHoraInicio(LocalTime.of(8, 00));
+		agendamento.setHoraFim(LocalTime.of(9, 00));
 		
 		agendamentoService.save(agendamento);
 		
-		assertThat(agendamento.getId()).isEqualByComparingTo(1L);
+		Agendamento itemJaRegistradoParaOPeriodo = agendamentoService.itemJaRegistradoParaOPeriodo(agendamento.getItem().getId(), agendamento.getData(),
+				LocalTime.of(7, 00), LocalTime.of(8, 30)).get();
+		
+		assertThat(itemJaRegistradoParaOPeriodo.getId()).isNotNull();
+		
 	}
 	
 }

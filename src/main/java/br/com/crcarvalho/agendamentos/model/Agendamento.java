@@ -39,6 +39,10 @@ public class Agendamento {
 	
 	private boolean devolvido;
 	
+	public Agendamento() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Agendamento(Usuario usuario, Item item) {
 		this.retirado = false;
 		this.devolvido = false;
