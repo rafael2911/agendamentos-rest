@@ -22,7 +22,7 @@ public class Agendamento {
 	
 	private LocalTime horaFim;
 	
-	private String Observacao;
+	private String observacao;
 	
 	private LocalDateTime dataRegistro;
 	
@@ -51,6 +51,17 @@ public class Agendamento {
 		this.dataRegistro = LocalDateTime.now();
 	}
 
+	public Agendamento(Item item, LocalDate data, LocalTime horaInicio, LocalTime horaFim,
+			Usuario usuario, Motivo motivo, String observacao) {
+		this(usuario, item);
+		this.data = data;
+		this.horaInicio = horaInicio;
+		this.horaFim = horaFim;
+		this.motivo = motivo;
+		this.observacao = observacao;
+		
+	}
+
 	public LocalDate getData() {
 		return data;
 	}
@@ -76,11 +87,11 @@ public class Agendamento {
 	}
 
 	public String getObservacao() {
-		return Observacao;
+		return observacao;
 	}
 
 	public void setObservacao(String observacao) {
-		Observacao = observacao;
+		this.observacao = observacao;
 	}
 
 	public Motivo getMotivo() {
