@@ -26,10 +26,7 @@ public class AgendamentoService {
 
 	public void save(Agendamento agendamento) {
 		
-		Optional<Agendamento> itemJaRegistradoParaOPeriodo = agendamentoRepository.itemJaRegistradoParaOPeriodo(agendamento.getItem().getId(), agendamento.getData(),
-					agendamento.getHoraInicio(), agendamento.getHoraFim());
-		
-		if(itemJaRegistradoParaOPeriodo.isPresent()) {
+		if(agendamentoDuplicado(agendamento)) {
 			throw new DuplicateKeyException("Item " + agendamento.getItem().getDescricao() + " já agendado para este período!");
 		}
 		
@@ -38,6 +35,15 @@ public class AgendamentoService {
 	
 	public Optional<Agendamento> itemJaRegistradoParaOPeriodo(Long idItem, LocalDate data, LocalTime horaInicio, LocalTime horaFim){
 		return agendamentoRepository.itemJaRegistradoParaOPeriodo(idItem, data, horaInicio, horaFim);
+	}
+	
+	public boolean agendamentoDuplicado(Agendamento agendamento) {
+		
+		Optional<Agendamento> itemJaRegistradoParaOPeriodo = agendamentoRepository.itemJaRegistradoParaOPeriodo(agendamento.getItem().getId(), agendamento.getData(),
+				agendamento.getHoraInicio(), agendamento.getHoraFim());
+	
+		return itemJaRegistradoParaOPeriodo.isPresent() ? true : false; 
+		
 	}
 
 }
