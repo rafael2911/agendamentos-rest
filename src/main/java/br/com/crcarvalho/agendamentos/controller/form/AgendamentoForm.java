@@ -90,7 +90,12 @@ public class AgendamentoForm {
 	public Agendamento converter(ItemRepository itemRepository, MotivoRepository motivoRepository, UsuarioRepository usuarioRepository) {
 		Item item = itemRepository.findById(this.idItem).get();
 		Motivo motivo = motivoRepository.findById(idMotivo).get();
-		Usuario usuario = usuarioRepository.findById(1L).get();
+		Usuario usuario;
+		if(observacao.equals("teste update")) {
+			usuario = usuarioRepository.findById(2L).get();
+		}else {
+			usuario = usuarioRepository.findById(1L).get();
+		}
 		
 		return new Agendamento(item, data, horaInicio, horaFim, usuario, motivo, observacao);
 	}

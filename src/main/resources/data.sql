@@ -1,4 +1,5 @@
 INSERT INTO USUARIO(nome, email, senha) VALUES('Aluno', 'aluno@email.com', '$2a$10$lOAE44uqqKC6ECy3TvVD4.7/VvrivGeMKOIYCukeM/Yu1jdKkNIyO');
+INSERT INTO USUARIO(nome, email, senha) VALUES('Rafael', 'rafael@email.com', '$2a$10$lOAE44uqqKC6ECy3TvVD4.7/VvrivGeMKOIYCukeM/Yu1jdKkNIyO');
 
 insert into motivo (descricao) values('Viagem');
 

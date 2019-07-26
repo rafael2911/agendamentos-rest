@@ -3,6 +3,7 @@ package br.com.crcarvalho.agendamentos.controller;
 import java.net.URI;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.crcarvalho.agendamentos.controller.dto.AgendamentoDto;
 import br.com.crcarvalho.agendamentos.controller.dto.DetalhesDoAgendamentoDto;
 import br.com.crcarvalho.agendamentos.controller.form.AgendamentoForm;
+import br.com.crcarvalho.agendamentos.controller.form.AtualizacaoAgendamentoForm;
 import br.com.crcarvalho.agendamentos.model.Agendamento;
 import br.com.crcarvalho.agendamentos.repository.ItemRepository;
 import br.com.crcarvalho.agendamentos.repository.MotivoRepository;
@@ -71,6 +74,19 @@ public class AgendamentoController {
 		
 		if(optional.isPresent()) {
 			return ResponseEntity.ok().body(new DetalhesDoAgendamentoDto(optional.get()));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@PutMapping("{id}")
+	@Transactional
+	public ResponseEntity<AgendamentoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoAgendamentoForm form){
+		Optional<Agendamento> optional = agendamentoService.findById(id);
+		
+		if(optional.isPresent()) {
+			Agendamento agendamento = form.atualizar(id, agendamentoService);
+			return ResponseEntity.ok().body(new AgendamentoDto(agendamento));
 		}
 		
 		return ResponseEntity.notFound().build();

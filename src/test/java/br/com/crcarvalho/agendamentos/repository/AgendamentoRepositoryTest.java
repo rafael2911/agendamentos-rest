@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,10 +44,10 @@ public class AgendamentoRepositoryTest {
 		
 		agendamentoService.save(agendamento);
 		
-		Agendamento itemJaRegistradoParaOPeriodo = agendamentoService.itemJaRegistradoParaOPeriodo(agendamento.getItem().getId(), agendamento.getData(),
-				LocalTime.of(7, 00), LocalTime.of(8, 30)).get();
+		List<Agendamento> itemJaRegistradoParaOPeriodo = agendamentoService.itemJaRegistradoParaOPeriodo(agendamento.getItem().getId(), agendamento.getData(),
+				LocalTime.of(7, 00), LocalTime.of(8, 30));
 		
-		assertThat(itemJaRegistradoParaOPeriodo.getId()).isNotNull();
+		assertThat(itemJaRegistradoParaOPeriodo).isNotNull();
 		
 	}
 	
