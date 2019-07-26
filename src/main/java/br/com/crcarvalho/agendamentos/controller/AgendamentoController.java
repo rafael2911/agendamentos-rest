@@ -1,5 +1,7 @@
 package br.com.crcarvalho.agendamentos.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.crcarvalho.agendamentos.controller.dto.AgendamentoDto;
 import br.com.crcarvalho.agendamentos.controller.form.AgendamentoForm;
@@ -40,13 +43,16 @@ public class AgendamentoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<AgendamentoDto> cadastrar(@RequestBody AgendamentoForm form){
-		
+	public ResponseEntity<AgendamentoDto> cadastrar(@RequestBody AgendamentoForm form, UriComponentsBuilder uriBuilder){
 		Agendamento agendamento = form.converter(itemRepository, motivoRepository);
+		agendamentoService.save(agendamento);		
 		
-		agendamentoService.save(agendamento);
+		URI location = uriBuilder.path("/agendamentos/{id}")
+				.buildAndExpand(agendamento.getId())
+				.toUri();
 		
-		return ResponseEntity.ok().body(new AgendamentoDto(agendamento));
+		return ResponseEntity.created(location)
+				.body(new AgendamentoDto(agendamento));
 	}
 	
 }
