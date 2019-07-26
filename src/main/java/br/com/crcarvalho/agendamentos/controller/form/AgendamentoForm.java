@@ -12,6 +12,7 @@ import br.com.crcarvalho.agendamentos.model.Motivo;
 import br.com.crcarvalho.agendamentos.model.Usuario;
 import br.com.crcarvalho.agendamentos.repository.ItemRepository;
 import br.com.crcarvalho.agendamentos.repository.MotivoRepository;
+import br.com.crcarvalho.agendamentos.repository.UsuarioRepository;
 
 public class AgendamentoForm {
 	
@@ -86,10 +87,10 @@ public class AgendamentoForm {
 				+ horaFim + ", idMotivo=" + idMotivo + ", observacao=" + observacao + "]";
 	}
 
-	public Agendamento converter(ItemRepository itemRepository, MotivoRepository motivoRepository) {
+	public Agendamento converter(ItemRepository itemRepository, MotivoRepository motivoRepository, UsuarioRepository usuarioRepository) {
 		Item item = itemRepository.findById(this.idItem).get();
 		Motivo motivo = motivoRepository.findById(idMotivo).get();
-		Usuario usuario = new Usuario(1L, "Rafael", "rafael@email.com", "123456");
+		Usuario usuario = usuarioRepository.findById(1L).get();
 		
 		return new Agendamento(item, data, horaInicio, horaFim, usuario, motivo, observacao);
 	}

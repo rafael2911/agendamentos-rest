@@ -46,4 +46,9 @@ public class AgendamentoService {
 		
 	}
 
+	public Optional<Agendamento> findById(Long id) {
+		
+		return agendamentoRepository.findById(id);
+	}
+
 }
