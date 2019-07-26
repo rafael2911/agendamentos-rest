@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,6 +88,18 @@ public class AgendamentoController {
 		if(optional.isPresent()) {
 			Agendamento agendamento = form.atualizar(id, agendamentoService);
 			return ResponseEntity.ok().body(new AgendamentoDto(agendamento));
+		}
+		
+		return ResponseEntity.notFound().build();
+	}
+	
+	@DeleteMapping("{id}")
+	public ResponseEntity<Void> apagar(@PathVariable Long id){
+		Optional<Agendamento> optional = agendamentoService.findById(id);
+		
+		if(optional.isPresent()) {
+			agendamentoService.deleteById(id);
+			return ResponseEntity.ok().build();
 		}
 		
 		return ResponseEntity.notFound().build();

@@ -74,4 +74,8 @@ public class AgendamentoService {
 		return itemJaRegistradoParaOPeriodo.isEmpty() ? false : true; 	
 	}
 
+	public void deleteById(Long id) {
+		agendamentoRepository.deleteById(id);
+	}
+
 }
