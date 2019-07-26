@@ -2,6 +2,8 @@ package br.com.crcarvalho.agendamentos.controller;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,7 +45,7 @@ public class AgendamentoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<AgendamentoDto> cadastrar(@RequestBody AgendamentoForm form, UriComponentsBuilder uriBuilder){
+	public ResponseEntity<AgendamentoDto> cadastrar(@RequestBody @Valid AgendamentoForm form, UriComponentsBuilder uriBuilder){
 		Agendamento agendamento = form.converter(itemRepository, motivoRepository);
 		agendamentoService.save(agendamento);		
 		
