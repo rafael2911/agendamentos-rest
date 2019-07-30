@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,9 +27,9 @@ import br.com.crcarvalho.agendamentos.controller.dto.DetalhesDoAgendamentoDto;
 import br.com.crcarvalho.agendamentos.controller.form.AgendamentoForm;
 import br.com.crcarvalho.agendamentos.controller.form.AtualizacaoAgendamentoForm;
 import br.com.crcarvalho.agendamentos.model.Agendamento;
+import br.com.crcarvalho.agendamentos.model.Usuario;
 import br.com.crcarvalho.agendamentos.repository.ItemRepository;
 import br.com.crcarvalho.agendamentos.repository.MotivoRepository;
-import br.com.crcarvalho.agendamentos.repository.UsuarioRepository;
 import br.com.crcarvalho.agendamentos.service.AgendamentoService;
 
 @RestController
@@ -44,9 +45,6 @@ public class AgendamentoController {
 	@Autowired
 	private MotivoRepository motivoRepository;
 	
-	@Autowired
-	private UsuarioRepository usuarioRepository;
-	
 	@GetMapping
 	public Page<AgendamentoDto> listar(@PageableDefault(page = 0, size = 10) Pageable paginacao){
 		
@@ -56,8 +54,10 @@ public class AgendamentoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<AgendamentoDto> cadastrar(@RequestBody @Valid AgendamentoForm form, UriComponentsBuilder uriBuilder){
-		Agendamento agendamento = form.converter(itemRepository, motivoRepository, usuarioRepository);
+	public ResponseEntity<AgendamentoDto> cadastrar(@RequestBody @Valid AgendamentoForm form,
+			@AuthenticationPrincipal Usuario usuario, UriComponentsBuilder uriBuilder){
+		
+		Agendamento agendamento = form.converter(itemRepository, motivoRepository, usuario);
 		agendamentoService.save(agendamento);		
 		
 		URI location = uriBuilder.path("/agendamentos/{id}")

@@ -12,7 +12,6 @@ import br.com.crcarvalho.agendamentos.model.Motivo;
 import br.com.crcarvalho.agendamentos.model.Usuario;
 import br.com.crcarvalho.agendamentos.repository.ItemRepository;
 import br.com.crcarvalho.agendamentos.repository.MotivoRepository;
-import br.com.crcarvalho.agendamentos.repository.UsuarioRepository;
 
 public class AgendamentoForm {
 	
@@ -87,15 +86,9 @@ public class AgendamentoForm {
 				+ horaFim + ", idMotivo=" + idMotivo + ", observacao=" + observacao + "]";
 	}
 
-	public Agendamento converter(ItemRepository itemRepository, MotivoRepository motivoRepository, UsuarioRepository usuarioRepository) {
+	public Agendamento converter(ItemRepository itemRepository, MotivoRepository motivoRepository, Usuario usuario) {
 		Item item = itemRepository.findById(this.idItem).get();
 		Motivo motivo = motivoRepository.findById(idMotivo).get();
-		Usuario usuario;
-		if(observacao.equals("teste update")) {
-			usuario = usuarioRepository.findById(2L).get();
-		}else {
-			usuario = usuarioRepository.findById(1L).get();
-		}
 		
 		return new Agendamento(item, data, horaInicio, horaFim, usuario, motivo, observacao);
 	}
