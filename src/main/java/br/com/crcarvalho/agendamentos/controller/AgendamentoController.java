@@ -82,10 +82,13 @@ public class AgendamentoController {
 	
 	@PutMapping("{id}")
 	@Transactional
-	public ResponseEntity<AgendamentoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoAgendamentoForm form){
+	public ResponseEntity<AgendamentoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoAgendamentoForm form,
+				@AuthenticationPrincipal Usuario usuario){
+		
 		Optional<Agendamento> optional = agendamentoService.findById(id);
 		
 		if(optional.isPresent()) {
+			agendamentoService.usuarioPodeAlterar(optional.get(), usuario);
 			Agendamento agendamento = form.atualizar(id, agendamentoService);
 			return ResponseEntity.ok().body(new AgendamentoDto(agendamento));
 		}

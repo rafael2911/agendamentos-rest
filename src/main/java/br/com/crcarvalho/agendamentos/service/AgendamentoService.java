@@ -9,10 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import br.com.crcarvalho.agendamentos.controller.form.AtualizacaoAgendamentoForm;
 import br.com.crcarvalho.agendamentos.model.Agendamento;
+import br.com.crcarvalho.agendamentos.model.Usuario;
 import br.com.crcarvalho.agendamentos.repository.AgendamentoRepository;
 import br.com.crcarvalho.agendamentos.repository.MotivoRepository;
 
@@ -76,6 +78,12 @@ public class AgendamentoService {
 
 	public void deleteById(Long id) {
 		agendamentoRepository.deleteById(id);
+	}
+
+	public void usuarioPodeAlterar(Agendamento agendamento, Usuario usuario) {
+		if(!agendamento.getUsuario().equals(usuario))
+			throw new AccessDeniedException("Você não tem permissões para alterar este agendamento");
+		
 	}
 
 }
