@@ -22,10 +22,10 @@ public class AgendamentoForm {
 	@NotNull
 	private LocalDate data;
 	
-	@NotNull @ApiModelProperty(dataType="java.lang.String")
+	@NotNull @ApiModelProperty(dataType="java.lang.String", example="HH:mm")
 	private LocalTime horaInicio;
 	
-	@NotNull @ApiModelProperty(dataType="java.lang.String")
+	@NotNull @ApiModelProperty(dataType="java.lang.String", example="HH:mm")
 	private LocalTime horaFim;
 	
 	@NotNull @Min(1)
