@@ -12,6 +12,7 @@ import br.com.crcarvalho.agendamentos.model.Motivo;
 import br.com.crcarvalho.agendamentos.model.Usuario;
 import br.com.crcarvalho.agendamentos.repository.ItemRepository;
 import br.com.crcarvalho.agendamentos.repository.MotivoRepository;
+import io.swagger.annotations.ApiModelProperty;
 
 public class AgendamentoForm {
 	
@@ -21,10 +22,10 @@ public class AgendamentoForm {
 	@NotNull
 	private LocalDate data;
 	
-	@NotNull
+	@NotNull @ApiModelProperty(dataType="java.lang.String")
 	private LocalTime horaInicio;
 	
-	@NotNull
+	@NotNull @ApiModelProperty(dataType="java.lang.String")
 	private LocalTime horaFim;
 	
 	@NotNull @Min(1)
