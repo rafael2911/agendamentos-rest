@@ -70,6 +70,13 @@
 			<version>2.9.2</version>
 		</dependency>
 		
+		<!-- Dependencia para BD Heroku -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
