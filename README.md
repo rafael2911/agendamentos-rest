@@ -1,25 +1,25 @@
 <h1>Backend Manager Places (CRUD)</h1>
 <br>
-   **Address Api Heroku**
- - heroku
+   <b>Address Api Heroku</b>
+   - heroku
  
- **URL**
+   <b>URL<b>
  
-  /places
+      /places
 
-  **Method:**
+      <b>Method:</b>
   
-  `GET`
+      `GET`
   
-  **URL Params**
+      <b>URL Params</b>
 
-    **Optional:**
+         Optional:
     
-    `name=[string]`
+         `name=[string]`
    
-  **Success Response:**
+      <b>Success Response:</b>
   
-    **Code:** 200 <br />
+      Code: 200 <br />
   
  **URL**
  
