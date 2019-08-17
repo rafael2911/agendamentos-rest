@@ -25,10 +25,10 @@ Code: 200
 Example Values:
 ´´´
 {
-  "city": "string",
-  "name": "string",
-  "slug": "string",
-  "state": "string"
+  city: string,
+  name: string,
+  slug: string,
+  state: string
 }
 ´´´
 
