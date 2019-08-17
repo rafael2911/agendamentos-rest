@@ -3,7 +3,7 @@
    <b>Address Api Heroku</b>
    - heroku
  
-   <b>URL<b>
+   <b>URL</b>
  
       /places
 
