@@ -8,20 +8,25 @@
   /places
 
   **Method:**
+  
   `GET`
   
   **URL Params**
 
     **Optional:**
+    
     `name=[string]`
    
   **Success Response:**
+  
     **Code:** 200 <br />
   
  **URL**
+ 
    /places
 
    **Method:**
+   
    `POST`
  
    **Data Params**
@@ -29,9 +34,11 @@
      **Example Values:** `{ name: string, city: string, slug: string, state: string}`
 
   **Success Response:**
+  
     **Code:** 200 <br />
     
   **Error Response:**
+  
     **Code:** 400 <br />
   
   <_What should the status code be on success and is there any returned data? This is useful when people need to to know what their callbacks should expect!_>
