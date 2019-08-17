@@ -1,39 +1,37 @@
 ** Backend Manager Places (CRUD) **
 ----
- Address Api Heroku
+ **Address Api Heroku**
  - heroku
  
- * **URL**
-
+ **URL**
   /places
 
-* **Method:**
-
+  **Method:**
   `GET`
   
-*  **URL Params**
+  **URL Params**
 
-   **Optional:**
- 
-   `name=[string]`
+    **Optional:**
+    `name=[string]`
    
-* **Success Response:**
-
-  * **Code:** 200 <br />
+  **Success Response:**
+    **Code:** 200 <br />
   
-  * **URL**
+ **URL**
+   /places
 
-  /places
-
-* **Method:**
-
-  `POST`
+   **Method:**
+   `POST`
  
-* **Data Params**
+   **Data Params**
 
-**Example Values:** `{ name: string, city: string, slug: string, state: string}`
+     **Example Values:** `{ name: string, city: string, slug: string, state: string}`
 
-* **Success Response:**
+  **Success Response:**
+    **Code:** 200 <br />
+    
+  **Error Response:**
+    **Code:** 400 <br />
   
   <_What should the status code be on success and is there any returned data? This is useful when people need to to know what their callbacks should expect!_>
 
