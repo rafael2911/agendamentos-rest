@@ -23,14 +23,14 @@ Code: 200
 
 #### Data Params
 Example Values:
-´´´
+```
 {
   city: string,
   name: string,
   slug: string,
   state: string
 }
-´´´
+```
 
 #### Success Response:
 Code: 200
